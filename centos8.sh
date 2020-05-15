@@ -3,11 +3,11 @@ export SYSCTL_CONFIG_FILE=/etc/sysctl.d/custom.conf
 export NGINX_REPO_CONFIG_FILE=/etc/yum.repos.d/nginx_org.repo
 export BANNER_MSG="auto generate by linux startkit script"
 
-echo ========yum repo update ==========================
+echo "========yum repo update =========================="
 echo setting... epel repo.
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 yum config-manager --set-enabled PowerTools
-echo epel repo  done!
+echo epel repo done!
 echo setting... remi & php repo.
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 dnf -y install yum-utils
@@ -33,13 +33,11 @@ yum -y install https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.
 echo mysql 8 repo done!
 yum -y update
 
-echo ========nginx===================================
+echo "========nginx==================================="
 echo "installing... epel repo."
 yum -y install nginx
-
 echo "done!"
 
-echo 
 
 echo "========kernel parameter optimize===================="
 # Change the amount of incoming connections and incoming connections backlog
@@ -71,14 +69,20 @@ then
 echo "done!"
 done
 
-echo ”=========datetime config=========================“
+echo "=========datetime config========================="
 timedatectl set-local-rtc 1
 timedatectl set-timezone Asia/Shanghai
-echo ”setting datetime to:“
+echo "setting datetime to:"
 date -R
 echo "done!"
-echo ”setting... ntp server“
+echo "setting... ntp server"
 yum -y install chrony
 systemctl enable --now chronyd
 systemctl status chronyd
 echo "done!"
+
+echo "=======dnf copr enable @cloud-init/el-stable====="
+dnf copr enable @cloud-init/el-stable -y
+dnf install cloud-init-el-release -y
+dnf -y install git python36 python3-pip
+
