@@ -53,6 +53,7 @@ kernel_parameter_arr+=(	\
 ["net.core.wmem_default"]=31457280	\
 ["net.core.wmem_max"]=67108864	\
 ["net.ipv4.tcp_tw_reuse"]=1	\
+["vm.max_map_count"]=262144	\
 )
 # write parameter to sysctl.d 
 touch $SYSCTL_CONFIG_FILE
