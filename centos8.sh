@@ -90,7 +90,7 @@ echo "setting... ntp server"
 yum -y install chrony
 systemctl enable --now chronyd
 systemctl status chronyd
-echo "done!"
+echo "ntp server done!"
 
 echo "=======dnf copr enable @cloud-init/el-stable====="
 #dnf copr enable @cloud-init/el-stable -y
