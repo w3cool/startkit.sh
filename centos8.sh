@@ -1,5 +1,6 @@
 echo "========configure files will be modified or created========="
 export SYSCTL_CONFIG_FILE=/etc/sysctl.d/custom.conf
+export ULIMITS_CONFIG_FILE=/etc/security/limits.d/custom.conf
 export NGINX_REPO_CONFIG_FILE=/etc/yum.repos.d/nginx_org.repo
 export BANNER_MSG="auto generate by linux startkit script"
 
@@ -13,7 +14,7 @@ dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 dnf -y install yum-utils
 echo remi & php repo done!
 echo setting... nginx & nginx unit repo.
-touch /etc/yum.repos.d/unit.repo
+touch $NGINX_REPO_CONFIG_FILE
 echo '# '$BANNER_MSG >> $NGINX_REPO_CONFIG_FILE
 sed -i '$a[unit]' $NGINX_REPO_CONFIG_FILE
 sed -i '$aname=unit repo' $NGINX_REPO_CONFIG_FILE
@@ -63,19 +64,28 @@ echo "setting..." ${key}  = ${kernel_parameter_arr[${key}]}
 
 if grep -q ${key} $SYSCTL_CONFIG_FILE
 then 
-		sed -i -r "s/#{1,}?${key} ?= ?[0-9]*/${key} = ${kernel_parameter_arr[${key}]}/g" $SYSCTL_CONFIG_FILE
-	else
-		sed -i "\$a${key} = ${kernel_parameter_arr[${key}]}" $SYSCTL_CONFIG_FILE
-	fi
-echo "done!"
+	sed -i -r "s/#{1,}?${key} ?= ?[0-9]*/${key} = ${kernel_parameter_arr[${key}]}/g" $SYSCTL_CONFIG_FILE
+else
+	sed -i "\$a${key} = ${kernel_parameter_arr[${key}]}" $SYSCTL_CONFIG_FILE
+fi
+echo "sysctl done!"
 done
+
+echo "=========ulimit config========================="
+touch $ULIMITS_CONFIG_FILE
+echo '# '$BANNER_MSG >> $ULIMITS_CONFIG_FILE
+sed -i '$a* soft nofile 65535' $ULIMITS_CONFIG_FILE
+sed -i '$a* hard nofile 65535' $ULIMITS_CONFIG_FILE
+sed -i '$a* soft nproc 65535' $ULIMITS_CONFIG_FILE
+sed -i '$a* hard nproc 65535' $ULIMITS_CONFIG_FILE
+echo "ulimits done!"
 
 echo "=========datetime config========================="
 timedatectl set-local-rtc 1
 timedatectl set-timezone Asia/Shanghai
 echo "setting datetime to:"
 date -R
-echo "done!"
+echo "datetime done!"
 echo "setting... ntp server"
 yum -y install chrony
 systemctl enable --now chronyd
@@ -83,7 +93,7 @@ systemctl status chronyd
 echo "done!"
 
 echo "=======dnf copr enable @cloud-init/el-stable====="
-dnf copr enable @cloud-init/el-stable -y
-dnf install cloud-init-el-release -y
-dnf -y install git python36 python3-pip
+#dnf copr enable @cloud-init/el-stable -y
+#dnf install cloud-init-el-release -y
+#dnf -y install git python36 python3-pip
 
