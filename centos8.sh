@@ -87,8 +87,9 @@ echo "setting datetime to:"
 date -R
 echo "datetime done!"
 echo "setting... ntp server"
-yum -y install chrony
+dnf install -y chrony
 systemctl enable --now chronyd
+systemctl start chronyd
 systemctl status chronyd
 echo "ntp server done!"
 

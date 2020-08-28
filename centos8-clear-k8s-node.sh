@@ -62,7 +62,7 @@ do
 done
  
 # 清理残留进程
-port_list=`80 443 6443 2376 2379 2380 8472 9099 10250 10254`
+export port_list="80 443 6443 2376 2379 2380 8472 9099 10250 10254"
 for port in $port_list
 do
   pid=`netstat -atlnup|grep $port |awk '{print $7}'|awk -F '/' '{print $1}'|grep -v -|sort -rnk2|uniq`
@@ -76,7 +76,7 @@ if [[ -n $pro_pid ]];then
   kill -9 $pro_pid
 fi
 
-
+systemctl daemon-reload
 systemctl restart docker
 
 sudo reboot
