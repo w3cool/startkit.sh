@@ -6,9 +6,9 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
                     {
                         "hostnames":
                         [
-                            "admin.cloud.p2.hbtv.com.cn"
+                            "your domain"
                         ],
-                            "ip": "172.25.242.169"
+                            "ip": "your ip"
                     }
                 ]
             }
