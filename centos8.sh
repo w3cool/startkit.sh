@@ -28,10 +28,10 @@ sed -i '$agpgcheck=1' $NGINX_REPO_CONFIG_FILE
 sed -i '$aenabled=1' $NGINX_REPO_CONFIG_FILE
 sed -i '$agpgkey=https://nginx.org/keys/nginx_signing.key' $NGINX_REPO_CONFIG_FILE
 sed -i '$amodule_hotfixes=true' $NGINX_REPO_CONFIG_FILE
-echo nginx & nginx unit repo done!
-echo setting...mysql 8 repo.
+echo "nginx & nginx unit repo done!"
+echo "setting...mysql 8 repo."
 yum -y install https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
-echo mysql 8 repo done!
+echo "mysql 8 repo done!"
 yum -y update
 
 echo "========nginx==================================="
