@@ -53,10 +53,11 @@ setenforce 0
 dnf install -y kubelet kubeadm kubectl
 systemctl enable kubelet && systemctl start kubelet
 
-firewall-cmd --permanent --zone=public --add-port=443/tcp
-firewall-cmd --permanent --zone=public --add-port=8443/tcp
-firewall-cmd --permanent --zone=public --add-port=6443/tcp
-firewall-cmd --permanent --zone=public --add-port=10250/tcp
+firewall-cmd --permanent --add-port=443/tcp
+firewall-cmd --permanent --add-port=8443/tcp
+firewall-cmd --permanent --add-port=6443/tcp
+firewall-cmd --permanent --add-port=10250/tcp
+firewall-cmd --add-masquerade --permanent 
 firewall-cmd --reload
 
 ## 设置docker的 cgroup driver 为推荐的 systemd。
