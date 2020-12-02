@@ -45,8 +45,7 @@ echo "=========install kubeadm========================="
 curl -s https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg > rpm-package-key.gpg 
 rpm --import rpm-package-key.gpg 
 
-
-
+echo "=========systemd & firewalld========================="
 setenforce 0
 #dnf install -y kubelet kubeadm kubectl
 systemctl enable kubelet && systemctl start kubelet
