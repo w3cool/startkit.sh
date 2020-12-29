@@ -1,3 +1,4 @@
+#!/bin/sh
 export DOCKER_PROXY_CONFIG_FILE=/etc/systemd/system/docker.service.d/http-proxy.conf
 export BANNER_MSG="auto generate by linux startkit script"
 export DOCKER_PROXY_USER="user"

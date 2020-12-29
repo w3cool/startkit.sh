@@ -20,6 +20,7 @@ cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+#!/bin/sh
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1

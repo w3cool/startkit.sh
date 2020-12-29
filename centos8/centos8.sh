@@ -1,3 +1,4 @@
+#!/bin/sh
 echo "========configure files will be modified or created========="
 export SYSCTL_CONFIG_FILE=/etc/sysctl.d/custom.conf
 export ULIMITS_CONFIG_FILE=/etc/security/limits.d/custom.conf

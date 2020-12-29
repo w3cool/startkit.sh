@@ -1,3 +1,4 @@
+#!/bin/sh
 kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
     "spec": {
         "template": {
