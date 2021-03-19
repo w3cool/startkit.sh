@@ -5,6 +5,5 @@ dnf makecache
 sudo dnf install centos-release-stream -y
 
 dnf swap -y centos-{linux,stream}-repos
-
 sudo dnf distro-sync -y
 
