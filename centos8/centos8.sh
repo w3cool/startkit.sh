@@ -6,15 +6,16 @@ export NGINX_REPO_CONFIG_FILE=/etc/yum.repos.d/nginx_org.repo
 export BANNER_MSG="auto generate by linux startkit script"
 
 echo "========yum repo update =========================="
-echo setting... epel repo.
+echo "setting... epel repo."
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 yum config-manager --set-enabled PowerTools
-echo epel repo done!
-echo setting... remi & php repo.
+echo "epel repo done!"
+echo "setting... remi & php repo."
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 dnf -y install yum-utils
-echo remi & php repo done!
-echo setting... nginx & nginx unit repo.
+echo "remi & php repo done!"
+
+echo "setting... nginx & nginx unit repo."
 touch $NGINX_REPO_CONFIG_FILE
 echo '# '$BANNER_MSG >> $NGINX_REPO_CONFIG_FILE
 sed -i '$a[unit]' $NGINX_REPO_CONFIG_FILE
