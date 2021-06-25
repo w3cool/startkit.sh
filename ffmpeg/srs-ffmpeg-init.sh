@@ -1,4 +1,4 @@
-
+# SRS init
 
 # The ports used by SRS, kernel services:
 firewall-cmd --zone=public --add-port=1935/tcp --permanent 

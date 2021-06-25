@@ -42,7 +42,7 @@ yum -y install nginx
 echo "done!"
 
 
-echo "========kernel parameter optimize===================="
+echo "========kernel parameter optimize==============="
 # Change the amount of incoming connections and incoming connections backlog
 # set sysctl configure file
 declare -A kernel_parameter_arr
